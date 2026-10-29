@@ -1,3 +1,4 @@
+**Демо:** https://expense-tracker-8y99.onrender.com/docs
 # Expense Tracker
 
 REST API для учёта расходов и контроля месячных бюджетов по категориям.
