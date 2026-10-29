@@ -59,11 +59,21 @@ def test_list_expenses_filtered_by_category(client):
 
     client.post(
         "/expenses",
-        json={"amount": "100.00", "description": "Хлеб", "date": "2026-10-10", "category_id": food_id},
+        json={
+            "amount": "100.00",
+            "description": "Хлеб",
+            "date": "2026-10-10",
+            "category_id": food_id,
+        },
     )
     client.post(
         "/expenses",
-        json={"amount": "50.00", "description": "Метро", "date": "2026-10-11", "category_id": transport_id},
+        json={
+            "amount": "50.00",
+            "description": "Метро",
+            "date": "2026-10-11",
+            "category_id": transport_id,
+        },
     )
 
     response = client.get("/expenses", params={"category_id": food_id})
@@ -77,7 +87,12 @@ def test_delete_expense(client):
     category_id = create_category(client)
     created = client.post(
         "/expenses",
-        json={"amount": "20.00", "description": "Кофе", "date": "2026-10-12", "category_id": category_id},
+        json={
+            "amount": "20.00",
+            "description": "Кофе",
+            "date": "2026-10-12",
+            "category_id": category_id,
+        },
     ).json()
 
     response = client.delete(f"/expenses/{created['id']}")

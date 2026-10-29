@@ -19,7 +19,11 @@ def test_put_budget_creates_budget(client):
 
     response = client.put(
         "/budgets",
-        json={"category_id": category_id, "month": "2026-10", "limit_amount": "5000.00"},
+        json={
+            "category_id": category_id,
+            "month": "2026-10",
+            "limit_amount": "5000.00",
+        },
     )
 
     assert response.status_code == 200
@@ -31,7 +35,11 @@ def test_put_budget_creates_budget(client):
 
 def test_put_budget_updates_existing_budget(client):
     category_id = create_category(client)
-    payload = {"category_id": category_id, "month": "2026-10", "limit_amount": "5000.00"}
+    payload = {
+        "category_id": category_id,
+        "month": "2026-10",
+        "limit_amount": "5000.00",
+    }
     first = client.put("/budgets", json=payload).json()
 
     payload["limit_amount"] = "7000.00"
@@ -65,7 +73,11 @@ def test_status_shows_spent_remaining_and_not_exceeded(client):
     category_id = create_category(client)
     client.put(
         "/budgets",
-        json={"category_id": category_id, "month": "2026-10", "limit_amount": "1000.00"},
+        json={
+            "category_id": category_id,
+            "month": "2026-10",
+            "limit_amount": "1000.00",
+        },
     )
     create_expense(client, category_id, "300.00", "2026-10-05")
     create_expense(client, category_id, "200.50", "2026-10-20")
@@ -99,7 +111,11 @@ def test_status_ignores_expenses_from_other_months(client):
     category_id = create_category(client)
     client.put(
         "/budgets",
-        json={"category_id": category_id, "month": "2026-10", "limit_amount": "1000.00"},
+        json={
+            "category_id": category_id,
+            "month": "2026-10",
+            "limit_amount": "1000.00",
+        },
     )
     create_expense(client, category_id, "400.00", "2026-09-30")
     create_expense(client, category_id, "100.00", "2026-11-01")
